@@ -5,10 +5,10 @@
   }
 
 body {
-  background: hsl(100, 50%, 90%);
+  background: hsl(200, 50%, 90%);
   display: flex;
   height: 100vh;
-  widht: 100%;
+  width: 100%;
   align-items: center;
   justify-content: center;
 }
@@ -26,12 +26,16 @@ body {
   height: 20px;
   border: 1px solid #ccc;
   box-sizing: border-box;
-  background: white;
   transition: all 0.15s;
+  background: white;
 }
 
 .div_grid:hover {
   border: 0.9px solid #ddd;
   background: hsl(212, 50%, 85%);
   height: 20.2px;
+}
+
+.black {
+  background: hsl(212, 50%, 15%);
 }
