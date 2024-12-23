@@ -12,23 +12,35 @@ let default_grid = default_grid_size;
 for (let i = 0; i < default_grid * default_grid; i++) {
 	const div_grid = document.createElement("div");
 	div_grid.setAttribute("class", "div_grid");
-	if (i % 16 == 0) {
-		div_grid.style.display = "block";
-		dFrag.appendChild(div_grid);
-	}
-	else {
-		div_grid.style.display = "inline";
-		dFrag.appendChild(div_grid);
-	}
+	dFrag.appendChild(div_grid);
 }
 
 container.appendChild(dFrag);
 
-container.addEventListener("click", (event) => {
-	let rand_color = parseInt(Math.floor(Math.random * 255) + 1);
-	/*
-	event.target.style.background = `rgb(${rand_color}, ${rand_color}, ${rand_color})`;
-	*/
-	event.target.classList.add("black");
+const color_change_event = new Event("color_change");
 
+const handle_mouse_move = (event) => {
+	if (event.target.classList.contains("div_grid")) {
+		event.target.classList.add("black");
+	}
+
+	event.target.dispatchEvent(color_change_event);
+}
+
+//container.addEventListener("color_change", (event) => {
+//	console.log(event.target);
+//});
+
+container.addEventListener("mousedown", (event) => {
+	event.preventDefault();
+
+	container.addEventListener("mousemove", handle_mouse_move);
+});
+
+container.addEventListener("mouseup", () => {
+	container.removeEventListener("mousemove", handle_mouse_move);
+});
+
+container.addEventListener("mouseleave", () => {
+	container.removeEventListener("mousemove", handle_mouse_move);
 });
